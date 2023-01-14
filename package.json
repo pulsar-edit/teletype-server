@@ -12,7 +12,7 @@
     "test": "mocha test/setup.js **/*.test.js --ui=tdd",
     "test:middleware": "mocha test/setup.js test/middleware.test.js --ui=tdd",
     "test:identity": "mocha test/setup.js test/identity-provider.test.js --ui=tdd",
-    "test:controller": "jest --selectProjects Controller",
+    "test:controller": "cross-env PULSAR_STATUS=dev jest --selectProjects Controller",
     "start": "node script/server",
     "migrations": "pg-migrations apply --directory ./migrations",
     "start:dev": "cross-env PULSAR_STATUS=dev node script/server"
@@ -48,7 +48,9 @@
   "devDependencies": {
     "@databases/pg-migrations": "^5.0.2",
     "@databases/pg-test": "^3.1.2",
+    "cross-env": "^7.0.3",
     "deep-equal": "^1.0.1",
+    "jest": "^29.3.1",
     "mocha": "^5.2.0"
   }
 }

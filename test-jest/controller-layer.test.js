@@ -1,25 +1,26 @@
 const assert = require('assert')
-const {startTestServer} = require('..')
-const {get, post} = require('./helpers/request')
+const {startServer} = require('..')
+const {get, post} = require('../test/helpers/request')
 const deepEqual = require('deep-equal')
-const condition = require('./helpers/condition')
+const condition = require('../test/helpers/condition')
 
-suite('Controller', () => {
+//test('Controller', () => {
   let server
 
-  suiteSetup(async () => {
-    server = await startTestServer({databaseURL: process.env.TEST_DATABASE_URL})
+  beforeAll(async () => {
+    //server = await startTestServer({databaseURL: process.env.TEST_DATABASE_URL})
+    server = await startServer();
   })
 
-  suiteTeardown(() => {
+  afterAll(() => {
     return server.stop()
   })
 
-  setup(() => {
+  afterEach(() => {
     return server.reset()
   })
 
-  suite('POST /peers/:id/signals', () => {
+  describe('POST /peers/:id/signals', () => {
     test('sends authenticated signals to the peer with the given id', async () => {
       const peer1Identity = await server.identityProvider.identityForToken('peer-1-token')
 
@@ -79,7 +80,7 @@ suite('Controller', () => {
     })
   })
 
-  suite('GET /identity', () => {
+  describe('GET /identity', () => {
     test('returns the identity associated with the given OAuth token', async () => {
       const identity = await get(server, '/identity', {
         headers: {'GitHub-OAuth-token': 'peer-1-token'}
@@ -108,7 +109,7 @@ suite('Controller', () => {
     })
   })
 
-  suite('events', () => {
+  describe('events', () => {
     test('stores events on POST /portals and GET /portals/:id', async () => {
       const peer1Headers = {headers: {'GitHub-OAuth-token': 'peer-1-token'}}
       const peer2Headers = {headers: {'GitHub-OAuth-token': 'peer-2-token'}}
@@ -155,7 +156,7 @@ suite('Controller', () => {
       assert(events[3].created_at < events[4].created_at)
     })
   })
-})
+//})
 
 function simulateAuthenticationError (token) {
   const error = new Error('an error')
