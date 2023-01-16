@@ -30,7 +30,7 @@ CREATE TABLE shared_editor_selection_marker_layers (
 
 CREATE TABLE portals (
   id UUID PRIMARY KEY,
-  host_peer_id STRING
+  host_peer_id TEXT
 );
 
 CREATE TYPE event_enum AS ENUM('create-portal', 'lookup-portal');
@@ -38,7 +38,7 @@ CREATE TYPE event_enum AS ENUM('create-portal', 'lookup-portal');
 CREATE TABLE events (
   id BIGSERIAL PRIMARY KEY,
   name event_enum,
-  user_id STRING,
-  portal_id STRING,
+  user_id TEXT,
+  portal_id TEXT,
   created_at TIMESTAMP WITH TIME ZONE
 );

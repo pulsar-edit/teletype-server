@@ -21,7 +21,7 @@
   "license": "MIT",
   "pg": {
     "test": {
-      "migrationScript": [
+      "migrationsScript": [
         "npm",
         "run",
         "migrations"
