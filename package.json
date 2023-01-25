@@ -37,7 +37,7 @@
     "node-pg-migrate": "^2.25.0",
     "pg-promise": "^8.1.1",
     "postgres": "^3.3.3",
-    "pusher": "^2.0.1",
+    "pusher": "^5.1.2",
     "request": "^2.87.0",
     "request-promise-native": "^1.0.5",
     "server-destroy": "^1.0.1",
